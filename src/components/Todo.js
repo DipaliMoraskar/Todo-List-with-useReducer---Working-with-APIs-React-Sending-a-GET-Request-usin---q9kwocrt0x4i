@@ -1,17 +1,34 @@
-const todoReducer = (state, action) => {
-    switch (action.type) {
-        case"ADD":
-        return [...state,action.payload];
-        return state;
+import React from "react";
+const Todo = ({ dispatch, state }) => {
 
-        case"DELETE" :
-        return state.filter((item)=>{
-            if(item.id!=action.payload.id){
-                return state;
-            }
-        });
-        default:return state;
-    }
-}
+  console.log("state is ",state);
+  return (
 
-export { todoReducer }
+          <>
+            {state.map((item) => {
+              
+              return (
+                <div className="todo" key={item.id}> 
+                
+                  <div id={item.id} className="todo-title">
+                  {item.title}
+                  <button
+                    onClick={() =>
+                      dispatch({ type: "DELETE",payload:{title:item.title,id:item.id} })
+                    }
+                    className="todo-delete"
+                  >
+                    DELETE
+                  </button>
+                </div>
+                
+                </div>
+              );
+            })}
+            </>
+  );
+};
+
+
+
+export { Todo }
